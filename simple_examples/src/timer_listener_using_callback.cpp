@@ -45,12 +45,12 @@ public:
       [this]([[maybe_unused]] std_msgs::msg::String::ConstSharedPtr msg) -> void
       {
         RCLCPP_INFO(this->get_logger(), "Catch message");
-        RCLCPP_INFO(this->get_logger(), "I heard: [%s] on process id [%d]", msg->data.c_str(), getpid());
+        RCLCPP_INFO(this->get_logger(), "I heard: [%s] on thread id [%ld]", msg->data.c_str(), std::this_thread::get_id());
       };
     auto timer_callback =
         [this]() -> void
     {
-      RCLCPP_INFO(this->get_logger(), "Timer triggered on process id [%d].", getpid());
+      RCLCPP_INFO(this->get_logger(), "Timer triggered on thread id [%ld].", std::this_thread::get_id());
       auto msg = sub_->create_message();
       rclcpp::MessageInfo msg_info;
       if (sub_->take_type_erased(msg.get(), msg_info)) {
