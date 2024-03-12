@@ -1,0 +1,4 @@
+<launch>
+  <node pkg="simple_examples" exec="talker" output="screen" />
+  <node pkg="simple_examples" exec="listener" output="screen" />
+</launch>
