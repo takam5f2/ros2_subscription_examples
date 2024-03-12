@@ -1,6 +1,6 @@
 cmake_minimum_required(VERSION 3.5)
 
-project(simple_examples)
+project(intra_process_talker_listener)
 
 # Default to C++14
 if(NOT CMAKE_CXX_STANDARD)
@@ -23,7 +23,7 @@ include_directories(include)
 
 function(add_demo_dependencies library)
   target_compile_definitions(${library}
-    PRIVATE "simple_examples_BUILDING_DLL")
+    PRIVATE "INTRA_PROCESS_TALKER_LISTENER_BUILDING_DLL")
   ament_target_dependencies(${library}
     "example_interfaces"
     "rclcpp"
@@ -33,39 +33,25 @@ function(add_demo_dependencies library)
 endfunction()
 
 # Tutorials of Publish/Subscribe with Topics
-add_library(simple_examples_library SHARED
-  src/talker.cpp
-  src/timer_listener.cpp
-  src/timer_listener_using_callback.cpp
-  src/timer_batch_listener.cpp
-  src/talker_serialized_message.cpp
-  src/timer_listener_serialized_message.cpp)
-add_demo_dependencies(simple_examples_library)
+add_library(INTRA_PROCESS_TALKER_LISTENER_library SHARED
+  src/talker_intra_process.cpp
+  src/timer_listener_intra_process.cpp
+  src/timer_batch_listener_intra_process.cpp)
+add_demo_dependencies(INTRA_PROCESS_TALKER_LISTENER_library)
 
 
-
-rclcpp_components_register_node(simple_examples_library
-  PLUGIN "simple_examples::Talker"
-  EXECUTABLE talker)
-rclcpp_components_register_node(simple_examples_library
-  PLUGIN "simple_examples::TimerListener"
-  EXECUTABLE timer_listener)
-  rclcpp_components_register_node(simple_examples_library
-  PLUGIN "simple_examples::TimerListenerUsingCallback"
-  EXECUTABLE timer_listener_using_callback)
-rclcpp_components_register_node(simple_examples_library
-  PLUGIN "simple_examples::TimerBatchListener"
-  EXECUTABLE timer_batch_listener)
-rclcpp_components_register_node(simple_examples_library
-  PLUGIN "simple_examples::SerializedMessageTalker"
-  EXECUTABLE serialized_message_talker)
-rclcpp_components_register_node(simple_examples_library
-  PLUGIN "simple_examples::TimerSerializedMessageListener"
-  EXECUTABLE timer_serialized_message_listener)
-
+rclcpp_components_register_node(INTRA_PROCESS_TALKER_LISTENER_library
+  PLUGIN "intra_process_talker_listener::TalkerIntraProcess"
+  EXECUTABLE talker_intra_process)
+rclcpp_components_register_node(INTRA_PROCESS_TALKER_LISTENER_library
+  PLUGIN "intra_process_talker_listener::TimerListenerIntraProcess"
+  EXECUTABLE timer_listener_intra_process)
+rclcpp_components_register_node(INTRA_PROCESS_TALKER_LISTENER_library
+  PLUGIN "intra_process_talker_listener::TimerBatchListenerIntraProcess"
+  EXECUTABLE timer_batch_listener_intra_process)
 
 install(TARGETS
-  simple_examples_library
+  INTRA_PROCESS_TALKER_LISTENER_library
   ARCHIVE DESTINATION lib
   LIBRARY DESTINATION lib
   RUNTIME DESTINATION bin)
@@ -83,6 +69,7 @@ endif()
 
 # Install launch files.
 install(DIRECTORY
+  launch
   DESTINATION share/${PROJECT_NAME}/
 )
 

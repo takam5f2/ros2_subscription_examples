@@ -20,6 +20,7 @@
 
 using namespace std::chrono_literals;
 
+#include <iostream>
 
 #include "simple_examples/visibility_control.h"
 
@@ -41,16 +42,21 @@ public:
     double update_frequency = this->declare_parameter("update_frequency", 1.0);
     bool use_transient_local = this->declare_parameter("use_transient_local", false);
 
-    auto not_executed_callback =
+    auto executed_callback =
       [this]([[maybe_unused]] std_msgs::msg::String::ConstSharedPtr msg) -> void
       {
         RCLCPP_INFO(this->get_logger(), "Catch message");
-        RCLCPP_INFO(this->get_logger(), "I heard: [%s] on thread id [%ld]", msg->data.c_str(), std::this_thread::get_id());
+
+        std::ostringstream oss;
+        oss << std::this_thread::get_id();
+        RCLCPP_INFO(this->get_logger(), "I heard: [%s] on thread id [%s].", msg->data.c_str(), oss.str().c_str());
       };
     auto timer_callback =
         [this]() -> void
     {
-      RCLCPP_INFO(this->get_logger(), "Timer triggered on thread id [%ld].", std::this_thread::get_id());
+        std::ostringstream oss;
+        oss << std::this_thread::get_id();
+      RCLCPP_INFO(this->get_logger(), "Timer triggered on thread id [%s].", oss.str().c_str());
       auto msg = sub_->create_message();
       rclcpp::MessageInfo msg_info;
       if (sub_->take_type_erased(msg.get(), msg_info)) {
@@ -83,7 +89,7 @@ public:
       qos = qos.transient_local();
     }
 
-    sub_ = create_subscription<std_msgs::msg::String>("chatter", qos, not_executed_callback, subscription_options);
+    sub_ = create_subscription<std_msgs::msg::String>("chatter", qos, executed_callback, subscription_options);
 
     auto update_period = std::chrono::duration<double>(1.0 / update_frequency);
     timer_ = this->create_wall_timer(update_period, timer_callback);

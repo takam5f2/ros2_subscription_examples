@@ -12,8 +12,8 @@
 // See the License for the specific language governing permissions and
 // limitations under the License.
 
-#ifndef simple_examples__VISIBILITY_CONTROL_H_
-#define simple_examples__VISIBILITY_CONTROL_H_
+#ifndef SIMPLE_EXAMPLES__VISIBILITY_CONTROL_H_
+#define SIMPLE_EXAMPLES__VISIBILITY_CONTROL_H_
 
 #ifdef __cplusplus
 extern "C"
@@ -25,28 +25,28 @@ extern "C"
 
 #if defined _WIN32 || defined __CYGWIN__
   #ifdef __GNUC__
-    #define simple_examples_EXPORT __attribute__ ((dllexport))
-    #define simple_examples_IMPORT __attribute__ ((dllimport))
+    #define SIMPLE_EXAMPLES_EXPORT __attribute__ ((dllexport))
+    #define SIMPLE_EXAMPLES_IMPORT __attribute__ ((dllimport))
   #else
-    #define simple_examples_EXPORT __declspec(dllexport)
-    #define simple_examples_IMPORT __declspec(dllimport)
+    #define SIMPLE_EXAMPLES_EXPORT __declspec(dllexport)
+    #define SIMPLE_EXAMPLES_IMPORT __declspec(dllimport)
   #endif
-  #ifdef simple_examples_BUILDING_DLL
-    #define SIMPLE_EXAMPLES_PUBLIC simple_examples_EXPORT
+  #ifdef SIMPLE_EXAMPLES_BUILDING_DLL
+    #define SIMPLE_EXAMPLES_PUBLIC SIMPLE_EXAMPLES_EXPORT
   #else
-    #define SIMPLE_EXAMPLES_PUBLIC simple_examples_IMPORT
+    #define SIMPLE_EXAMPLES_PUBLIC SIMPLE_EXAMPLES_IMPORT
   #endif
   #define SIMPLE_EXAMPLES_PUBLIC_TYPE SIMPLE_EXAMPLES_PUBLIC
-  #define simple_examples_LOCAL
+  #define SIMPLE_EXAMPLES_LOCAL
 #else
-  #define simple_examples_EXPORT __attribute__ ((visibility("default")))
-  #define simple_examples_IMPORT
+  #define SIMPLE_EXAMPLES_EXPORT __attribute__ ((visibility("default")))
+  #define SIMPLE_EXAMPLES_IMPORT
   #if __GNUC__ >= 4
     #define SIMPLE_EXAMPLES_PUBLIC __attribute__ ((visibility("default")))
-    #define simple_examples_LOCAL  __attribute__ ((visibility("hidden")))
+    #define SIMPLE_EXAMPLES_LOCAL  __attribute__ ((visibility("hidden")))
   #else
     #define SIMPLE_EXAMPLES_PUBLIC
-    #define simple_examples_LOCAL
+    #define SIMPLE_EXAMPLES_LOCAL
   #endif
   #define SIMPLE_EXAMPLES_PUBLIC_TYPE
 #endif
@@ -55,4 +55,4 @@ extern "C"
 }
 #endif
 
-#endif  // simple_examples__VISIBILITY_CONTROL_H_
+#endif  // SIMPLE_EXAMPLES__VISIBILITY_CONTROL_H_

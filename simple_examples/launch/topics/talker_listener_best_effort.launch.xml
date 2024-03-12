@@ -1,4 +1,0 @@
-<launch>
-  <node pkg="simple_examples" exec="talker" output="screen" />
-  <node pkg="simple_examples" exec="listener_best_effort" output="screen" />
-</launch>
