@@ -65,10 +65,10 @@ public:
       std_msgs::msg::String msg;
       rclcpp::MessageInfo msg_info;
 
-      for (size_t i; i < subscriptions_array_.size(); i++)
+      for (size_t i = 0; i < subscriptions_array_.size(); i++)
       {
         while (subscriptions_array_[i]->take(msg, msg_info)) {
-          RCLCPP_INFO(this->get_logger(), "Catch message via subscription[%d]", i);
+          RCLCPP_INFO(this->get_logger(), "Catch message via subscription[%ld]", i);
           RCLCPP_INFO(this->get_logger(), "I heard: [%s]", msg.data.c_str());
           rmw_time_point_value_t source_timestamp =  msg_info.get_rmw_message_info().source_timestamp;
 

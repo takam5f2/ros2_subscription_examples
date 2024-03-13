@@ -68,7 +68,7 @@ public:
         rclcpp::MessageInfo msg_info;
         if (wait_result.get_wait_set().get_rcl_wait_set().subscriptions[i]) {
           if (subscriptions_array_[i]->take(msg, msg_info)) {
-            RCLCPP_INFO(this->get_logger(), "Catch message");
+            RCLCPP_INFO(this->get_logger(), "Catch message from subscription[%ld]", i);
             RCLCPP_INFO(this->get_logger(), "I heard: [%s]", msg.data.c_str());
             rmw_time_point_value_t source_timestamp =  msg_info.get_rmw_message_info().source_timestamp;
 

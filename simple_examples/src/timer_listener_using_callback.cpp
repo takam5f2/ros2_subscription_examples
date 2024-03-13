@@ -95,7 +95,7 @@ public:
     timer_ = this->create_wall_timer(update_period, timer_callback);
 
     RCLCPP_INFO(this->get_logger(), "/chatter message is updated at %f Hz", update_frequency);
-    if (qos.get_rmw_qos_profile().durability) {
+    if (qos.durability() == rclcpp::DurabilityPolicy::TransientLocal) {
       RCLCPP_INFO(this->get_logger(), "transient_local is enabled");
     }
   }

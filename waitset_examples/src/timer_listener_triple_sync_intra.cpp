@@ -118,11 +118,11 @@ private:
     std_msgs::msg::String msg;
     rclcpp::MessageInfo msg_info;
 
-    for (size_t i; i < subscriptions_array_.size(); i++)
+    for (size_t i = 0; i < subscriptions_array_.size(); i++)
     {
       auto msg = subscriptions_array_[i]->create_message();
       while (subscriptions_array_[i]->take_type_erased(msg.get(), msg_info)) {
-        RCLCPP_INFO(this->get_logger(), "Catch message via inter-process subscription[%d] (inter)", i);
+        RCLCPP_INFO(this->get_logger(), "Catch message via inter-process subscription[%ld] (inter)", i);
         subscriptions_array_[i]->handle_message(msg, msg_info);
 
         rmw_time_point_value_t source_timestamp =  msg_info.get_rmw_message_info().source_timestamp;
@@ -137,7 +137,7 @@ private:
 
   void receive_data_via_intra_process () {
     auto wait_result = wait_set_.wait(std::chrono::milliseconds(0));
-    // TODO: intra process waitable の使い方がよくわからないので調査する.
+    // TODO: intra process waitable の使い方がよくわからないので調査する. 今は syntax sugar で乗り切っている状態.
     if (wait_result.kind() == rclcpp::WaitResultKind::Ready && 
       subscriptions_array_[0]->get_intra_process_waitable()->is_ready(nullptr) && 
       subscriptions_array_[1]->get_intra_process_waitable()->is_ready(nullptr) &&
@@ -151,9 +151,9 @@ private:
     std_msgs::msg::String msg;
     rclcpp::MessageInfo msg_info;
 
-    for (size_t i; i < subscriptions_array_.size(); i++)
+    for (size_t i = 0; i < subscriptions_array_.size(); i++)
     {
-      RCLCPP_INFO(this->get_logger(), "Catch message via intra-process subscription[%d](intra)", i);
+      RCLCPP_INFO(this->get_logger(), "Catch message via intra-process subscription[%ld](intra)", i);
       auto intra_process_sub = subscriptions_array_[i]->get_intra_process_waitable();
       while ((intra_process_sub->is_ready(nullptr))) {
         std::shared_ptr<void> data = intra_process_sub->take_data();

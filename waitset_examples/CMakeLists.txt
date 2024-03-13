@@ -43,7 +43,8 @@ add_library(waitset_examples_library SHARED
   src/timer_listener_triple_async.cpp
   src/timer_listener_triple_separated_waitset.cpp
   src/timer_listener_twin_nested_waitset.cpp
-  src/timer_listener_triple_sync_intra.cpp)
+  src/timer_listener_triple_sync_intra.cpp
+  src/timer_listener_single_wait_some_period.cpp)
 add_demo_dependencies(waitset_examples_library)
 
 
@@ -78,6 +79,9 @@ rclcpp_components_register_node(waitset_examples_library
 rclcpp_components_register_node(waitset_examples_library
   PLUGIN "waitset_examples::TimerListenerTripleSyncIntra"
   EXECUTABLE timer_listener_triple_sync_intra)
+rclcpp_components_register_node(waitset_examples_library
+  PLUGIN "waitset_examples::TimerListenerSingleWaitSomePeriod"
+  EXECUTABLE timer_listener_single_wait_some_period)  
 
 install(TARGETS
   waitset_examples_library
