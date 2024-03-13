@@ -21,18 +21,18 @@
 using namespace std::chrono_literals;
 
 
-#include "intra_process_talker_listener/visibility_control.h"
+#include "waitset_examples/visibility_control.h"
 
-namespace intra_process_talker_listener
+namespace waitset_examples
 {
-// Create a TimerListener class that subclasses the generic rclcpp::Node base class.
+// Create a TimerListenerTripleSync class that subclasses the generic rclcpp::Node base class.
 // The main function below will instantiate the class as a ROS node.
-class TimerListenerIntraProcess : public rclcpp::Node
+class TimerListenerTripleSync : public rclcpp::Node
 {
 public:
-  INTRA_PROCESS_TALKER_LISTENER_PUBLIC
-  explicit TimerListenerIntraProcess(const rclcpp::NodeOptions & options)
-  : Node("timer_listener_intra_process", options)
+  WAITSET_EXAMPLES_PUBLIC
+  explicit TimerListenerTripleSync(const rclcpp::NodeOptions & options)
+  : Node("timer_listener_triple_sync", options)
   {
     // Create a callback function for when messages are received.
     // Variations of this function also exist using, for example UniquePtr for zero-copy transport.
@@ -41,62 +41,43 @@ public:
     double update_frequency = this->declare_parameter("update_frequency", 1.0);
     bool use_transient_local = this->declare_parameter("use_transient_local", false);
 
-    auto subscription_callback =
+    auto not_executed_callback =
       [this]([[maybe_unused]] std_msgs::msg::String::ConstSharedPtr msg) -> void
       {
-        RCLCPP_INFO(this->get_logger(), "Catch message");
-        RCLCPP_INFO(this->get_logger(), "I heard: [%s]", msg->data.c_str());
+        RCLCPP_INFO(this->get_logger(), "I never heard message");
       };
     auto timer_callback =
         [this]() -> void
     {
       RCLCPP_INFO(this->get_logger(), "Timer triggered.");
 
-      // check if intra-process communication is enabled.
-      if (this->get_node_options().use_intra_process_comms()){
-
-        // get the intra-process subscription's waitable.
-        auto intra_process_sub = sub_->get_intra_process_waitable();
-
-        // check if the waitable has data.
-        if (intra_process_sub->is_ready(nullptr) == true) {
-
-          // take the data and execute the callback.
-          std::shared_ptr<void> data = intra_process_sub->take_data();
-
-          RCLCPP_INFO(this->get_logger(), " Intra-process communication is performed.");
-
-          // execute the callback.
-          intra_process_sub->execute(data);
-        } else {
-          RCLCPP_INFO(this->get_logger(), " timer does not call sub_ callback due to no data by intra-process communication.");
-        }
+      auto wait_result = wait_set_.wait(std::chrono::milliseconds(0));
+      if (wait_result.kind() == rclcpp::WaitResultKind::Ready && 
+          wait_result.get_wait_set().get_rcl_wait_set().subscriptions[0] && 
+          wait_result.get_wait_set().get_rcl_wait_set().subscriptions[1] &&
+          wait_result.get_wait_set().get_rcl_wait_set().subscriptions[2]) {
+        RCLCPP_INFO(this->get_logger(), "wait_set tells that all subscriptions are ready");
       } else {
-        // get the message and message info.
-        auto msg = sub_->create_message();
-        rclcpp::MessageInfo msg_info;
+        RCLCPP_INFO(this->get_logger(), "wait_set tells that all subscriptions are not ready and return");
+        return;
+      }
 
-        // check if data is taken from the subscription.
-        if (sub_->take_type_erased(msg.get(), msg_info)) {
+      std_msgs::msg::String msg;
+      rclcpp::MessageInfo msg_info;
 
-          RCLCPP_INFO(this->get_logger(), " Inter-process communication is performed.");
-
-          // execute the callback.
-          sub_->handle_message(msg, msg_info);
-
-          // printout the source timestamp.
+      for (size_t i; i < subscriptions_array_.size(); i++)
+      {
+        while (subscriptions_array_[i]->take(msg, msg_info)) {
+          RCLCPP_INFO(this->get_logger(), "Catch message via subscription[%d]", i);
+          RCLCPP_INFO(this->get_logger(), "I heard: [%s]", msg.data.c_str());
           rmw_time_point_value_t source_timestamp =  msg_info.get_rmw_message_info().source_timestamp;
 
           int32_t sec = source_timestamp / 1000000000;
           uint32_t nsec = source_timestamp % 1000000000;
 
           RCLCPP_INFO(this->get_logger(), "Message is sent at : %d.%d", sec, nsec);
-
-        } else {
-          std::cout << " timer does not call sub_ callback due to no data by inter-process communication." << std::endl;
         }
       }
-
     };
     // Create a subscription to the topic which can be matched with one or more compatible ROS
     // publishers.
@@ -113,30 +94,35 @@ public:
       qos = qos.transient_local();
     }
 
-    // subscription.
-    sub_ = create_subscription<std_msgs::msg::String>("chatter", qos, subscription_callback, subscription_options);
+    // Create subscriptions.
+    subscriptions_array_[0] = create_subscription<std_msgs::msg::String>("chatter", qos, not_executed_callback, subscription_options);
 
-    // timer.
+    subscriptions_array_[1] = create_subscription<std_msgs::msg::String>("slower_chatter", qos, not_executed_callback, subscription_options);
+
+    subscriptions_array_[2] = create_subscription<std_msgs::msg::String>("slowest_chatter", qos, not_executed_callback, subscription_options);
+
+    // Add subscriptions to waitset.
+    for (auto & sub : subscriptions_array_) {
+      wait_set_.add_subscription(sub);
+    }
+
     auto update_period = std::chrono::duration<double>(1.0 / update_frequency);
     timer_ = this->create_wall_timer(update_period, timer_callback);
 
-    // printout the node and qos settings.
+    // printout the settings.
     RCLCPP_INFO(this->get_logger(), "/chatter message is updated at %f Hz", update_frequency);
     if (qos.durability() == rclcpp::DurabilityPolicy::TransientLocal) {
       RCLCPP_INFO(this->get_logger(), "transient_local is enabled");
     }
-    if (this->get_node_options().use_intra_process_comms()) {
-      RCLCPP_INFO(this->get_logger(), "Intra-process communication is enabled.");
-    }
-
   }
 
 private:
-  rclcpp::Subscription<std_msgs::msg::String>::SharedPtr sub_;
-  rclcpp::TimerBase::SharedPtr timer_;
+  std::array<rclcpp::Subscription<std_msgs::msg::String>::SharedPtr, 3> subscriptions_array_;
 
+  rclcpp::TimerBase::SharedPtr timer_;
+  rclcpp::WaitSet wait_set_;
 };
 
-}  // namespace intra_process_talker_listener
+}  // namespace waitset_examples
 
-RCLCPP_COMPONENTS_REGISTER_NODE(intra_process_talker_listener::TimerListenerIntraProcess)
+RCLCPP_COMPONENTS_REGISTER_NODE(waitset_examples::TimerListenerTripleSync)

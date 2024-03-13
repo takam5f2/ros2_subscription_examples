@@ -75,6 +75,10 @@ public:
     auto period = std::chrono::duration<double>(1.0 / update_frequency);
     timer_ = this->create_wall_timer(period, publish_message);
 
+    if (qos.durability() == rclcpp::DurabilityPolicy::TransientLocal) {
+      RCLCPP_INFO(this->get_logger(), "Using a transient local durability policy.");
+    }
+
     if (this->get_node_options().use_intra_process_comms()) {
       RCLCPP_INFO(this->get_logger(), "Intra-process communication is enabled.");
     }
