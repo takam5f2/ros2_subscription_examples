@@ -71,7 +71,7 @@ public:
       rclcpp::MessageInfo msg_info;
       auto msg = sub_->create_serialized_message();
 
-      if (sub_->take_serialized(*msg.get(), msg_info) == false) {
+      if (sub_->take_serialized(*msg, msg_info) == false) {
         return;
       }
 
