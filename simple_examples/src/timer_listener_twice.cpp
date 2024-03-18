@@ -25,14 +25,14 @@ using namespace std::chrono_literals;
 
 namespace simple_examples
 {
-// Create a TimerListener class that subclasses the generic rclcpp::Node base class.
+// Create a TimerListenerTwice class that subclasses the generic rclcpp::Node base class.
 // The main function below will instantiate the class as a ROS node.
-class TimerListener : public rclcpp::Node
+class TimerListenerTwice : public rclcpp::Node
 {
 public:
   SIMPLE_EXAMPLES_PUBLIC
-  explicit TimerListener(const rclcpp::NodeOptions & options)
-  : Node("timer_listener", options)
+  explicit TimerListenerTwice(const rclcpp::NodeOptions & options)
+  : Node("timer_listener_twice", options)
   {
     // Create a callback function for when messages are received.
     // Variations of this function also exist using, for example UniquePtr for zero-copy transport.
@@ -54,7 +54,7 @@ public:
       std_msgs::msg::String msg;
       rclcpp::MessageInfo msg_info;
       if (sub_->take(msg, msg_info)) {
-        RCLCPP_INFO(this->get_logger(), "Catch message");
+        RCLCPP_INFO(this->get_logger(), "Catch message at first");
         RCLCPP_INFO(this->get_logger(), "I heard: [%s]", msg.data.c_str());
 
         // printout the message info
@@ -62,6 +62,9 @@ public:
           printout_message_info(msg_info);
         }
 
+        sub_->take(msg, msg_info);
+        RCLCPP_INFO(this->get_logger(), "Catch message at second");
+        RCLCPP_INFO(this->get_logger(), "I heard: [%s]", msg.data.c_str());
       } else {
         RCLCPP_INFO(this->get_logger(), "Not catch message");
       }
@@ -104,35 +107,10 @@ private:
     const int32_t source_timestamp_sec = source_timestamp / 1000000000;
     const uint32_t source_timestamp_nsec = source_timestamp % 1000000000;
     RCLCPP_INFO(this->get_logger(), "Message is sent at : %d.%d", source_timestamp_sec, source_timestamp_nsec);
-
-    rmw_time_point_value_t received_timestamp =  msg_info.get_rmw_message_info().received_timestamp;
-    const int32_t received_timestamp_sec = received_timestamp / 1000000000;
-    const uint32_t received_timestamp_nsec = received_timestamp % 1000000000;    
-    RCLCPP_INFO(this->get_logger(), "Message is received at : %d.%d", received_timestamp_sec, received_timestamp_nsec);
-
-    RCLCPP_INFO(this->get_logger(), "publication sequence number: %ld", msg_info.get_rmw_message_info().publication_sequence_number);
-    RCLCPP_INFO(this->get_logger(), "reception sequence number: %ld", msg_info.get_rmw_message_info().reception_sequence_number);
-
-    std::ostringstream oss;
-    for (size_t i = sizeof(msg_info.get_rmw_message_info().publisher_gid.data); i > 0 ; i--)
-    {
-      oss << std::hex << std::setw(2) << std::setfill('0') << static_cast<unsigned>(msg_info.get_rmw_message_info().publisher_gid.data[i-1]); // This is not good code, but it is a simple example to understand the publisher_gid.
-    }
-
-      RCLCPP_INFO(this->get_logger(), "Message is sent from node: %s", oss.str().c_str());
-
-    if (msg_info.get_rmw_message_info().from_intra_process) {
-      RCLCPP_INFO(this->get_logger(), "Message is sent from intra process");
-    } else {
-      RCLCPP_INFO(this->get_logger(), "Message is sent from inter process");
-    }
-    if (printout_message_info_) {
-      RCLCPP_INFO(this->get_logger(), "Message info is printed out");
-    }
   }
 
 };
 
 }  // namespace simple_examples
 
-RCLCPP_COMPONENTS_REGISTER_NODE(simple_examples::TimerListener)
+RCLCPP_COMPONENTS_REGISTER_NODE(simple_examples::TimerListenerTwice)
