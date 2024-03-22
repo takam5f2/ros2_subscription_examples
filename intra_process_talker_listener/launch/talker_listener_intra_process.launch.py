@@ -45,7 +45,7 @@ def generate_launch_description():
                 name='talker_intra_process',
                 namespace='',
                 parameters=[{'use_transient_local': use_transient_local_value,
-                'update_frequency': listener_update_frequency_value,
+                'update_frequency': talker_update_frequency_value,
                 }],
                 extra_arguments=[{'use_intra_process_comms': use_intra_process_comms_value}]
             ),
@@ -55,7 +55,7 @@ def generate_launch_description():
                 name='timer_listener_intra_process',
                 namespace='',
                 parameters=[{'use_transient_local': use_transient_local_value,
-                'update_frequency': talker_update_frequency_value,
+                'update_frequency': listener_update_frequency_value,
                 }],
                 extra_arguments=[{'use_intra_process_comms': use_intra_process_comms_value}]
             )
