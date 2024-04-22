@@ -38,7 +38,7 @@ add_library(simple_examples_library SHARED
   src/timer_listener.cpp
   src/timer_listener_twice.cpp
   src/timer_listener_using_callback.cpp
-  src/timer_listener_using_callback_straight.cpp
+  src/timer_listener_using_normal_function.cpp
   src/timer_batch_listener.cpp
   src/talker_serialized_message.cpp
   src/timer_listener_serialized_message.cpp)
@@ -59,8 +59,8 @@ rclcpp_components_register_node(simple_examples_library
   PLUGIN "simple_examples::TimerListenerUsingCallback"
   EXECUTABLE timer_listener_using_callback)
 rclcpp_components_register_node(simple_examples_library
-  PLUGIN "simple_examples::TimerListenerUsingCallbackStraight"
-  EXECUTABLE timer_listener_using_callback_straight)
+  PLUGIN "simple_examples::TimerListenerUsingNormalFunction"
+  EXECUTABLE timer_listener_using_normal_function)
 rclcpp_components_register_node(simple_examples_library
   PLUGIN "simple_examples::TimerBatchListener"
   EXECUTABLE timer_batch_listener)
