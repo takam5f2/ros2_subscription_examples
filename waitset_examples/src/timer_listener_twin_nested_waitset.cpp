@@ -26,7 +26,7 @@ using namespace std::chrono_literals;
 
 namespace waitset_examples
 {
-// Create a TimerListener class that subclasses the generic rclcpp::Node base class.
+// Create a TimerListenerTwinNestedWaitset class that subclasses the generic rclcpp::Node base class.
 // The main function below will instantiate the class as a ROS node.
 class TimerListenerTwinNestedWaitSet : public rclcpp::Node
 {
@@ -62,11 +62,6 @@ public:
         }
       } else {
         RCLCPP_INFO(this->get_logger(), "wait_set tells that normal subscription is not ready and return");
-      }
-
-      if (wait_result.kind() != rclcpp::WaitResultKind::Ready || 
-          wait_result.get_wait_set().get_rcl_wait_set().subscriptions[0]) {
-        RCLCPP_INFO(this->get_logger(), "data has been already taken from normal subscription");
       }
 
       if (wait_result.kind() == rclcpp::WaitResultKind::Ready && 

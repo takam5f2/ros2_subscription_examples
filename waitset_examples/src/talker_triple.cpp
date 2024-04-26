@@ -28,7 +28,7 @@ using namespace std::chrono_literals;
 
 namespace waitset_examples
 {
-// Create a Talker class that subclasses the generic rclcpp::Node base class.
+// Create a TalkerTriple class that subclasses the generic rclcpp::Node base class.
 // The main function below will instantiate the class as a ROS node.
 class TalkerTriple : public rclcpp::Node
 {

@@ -26,14 +26,14 @@ using namespace std::chrono_literals;
 
 namespace waitset_examples
 {
-// Create a TimerListenerUsingCallback class that subclasses the generic rclcpp::Node base class.
+// Create a TimerListenerSingleUsingCallback class that subclasses the generic rclcpp::Node base class.
 // The main function below will instantiate the class as a ROS node.
-class TimerListenerUsingCallback : public rclcpp::Node
+class TimerListenerSingleUsingCallback : public rclcpp::Node
 {
 public:
   WAITSET_EXAMPLES_PUBLIC
-  explicit TimerListenerUsingCallback(const rclcpp::NodeOptions & options)
-  : Node("timer_listener_using_callback", options)
+  explicit TimerListenerSingleUsingCallback(const rclcpp::NodeOptions & options)
+  : Node("timer_listener_single_using_callback", options)
   {
     // Create a callback function for when messages are received.
     // Variations of this function also exist using, for example UniquePtr for zero-copy transport.
@@ -118,4 +118,4 @@ private:
 
 }  // namespace waitset_examples
 
-RCLCPP_COMPONENTS_REGISTER_NODE(waitset_examples::TimerListenerUsingCallback)
+RCLCPP_COMPONENTS_REGISTER_NODE(waitset_examples::TimerListenerSingleUsingCallback)
