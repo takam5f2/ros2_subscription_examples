@@ -25,7 +25,7 @@ using namespace std::chrono_literals;
 
 namespace waitset_examples
 {
-// Create a TimerListener class that subclasses the generic rclcpp::Node base class.
+// Create a TimerListenerTripleAsync class that subclasses the generic rclcpp::Node base class.
 // The main function below will instantiate the class as a ROS node.
 class TimerListenerTripleAsync : public rclcpp::Node
 {

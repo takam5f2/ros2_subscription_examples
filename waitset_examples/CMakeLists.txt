@@ -36,7 +36,7 @@ endfunction()
 add_library(waitset_examples_library SHARED
   src/talker_triple.cpp
   src/timer_listener_single.cpp
-  src/timer_listener_using_callback.cpp
+  src/timer_listener_single_using_callback.cpp
   src/timer_batch_listener_single.cpp
   src/timer_listener_twin_static.cpp
   src/timer_listener_triple_sync.cpp
@@ -56,8 +56,8 @@ rclcpp_components_register_node(waitset_examples_library
   PLUGIN "waitset_examples::TimerListenerSingle"
   EXECUTABLE timer_listener_single)
 rclcpp_components_register_node(waitset_examples_library
-  PLUGIN "waitset_examples::TimerListenerUsingCallback"
-  EXECUTABLE timer_listener_using_callback)
+  PLUGIN "waitset_examples::TimerListenerSingleUsingCallback"
+  EXECUTABLE timer_listener_single_using_callback)
 rclcpp_components_register_node(waitset_examples_library
   PLUGIN "waitset_examples::TimerBatchListenerSingle"
   EXECUTABLE timer_batch_listener_single)
