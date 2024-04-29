@@ -11,7 +11,7 @@ These example programs consist of four pakages.
 * [intra_process_examples](./intra_process_examples)
 * [waitset_examples](./waitset_examples)
 
-These are based on taker-listener in [GitHub - ros2/demos at humble](https://github.com/ros2/demos/tree/humble). If you understand the talker-listener, you can also understand these sample codes. `intra_process_examples` is based on [demos/intra_process_demo/src/two_node_pipeline/two_node_pipeline.cpp at humble · ros2/demos](https://github.com/ros2/demos/blob/humble/intra_process_demo/src/two_node_pipeline/two_node_pipeline.cpp) exceptionally.
+These are based on taker-listener in [GitHub - ros2/demos at humble](https://github.com/ros2/demos/tree/humble). If you understand the talker-listener, you can also understand these sample codes. Only `intra_process_examples` is based on [demos/intra_process_demo/src/two_node_pipeline/two_node_pipeline.cpp at humble · ros2/demos](https://github.com/ros2/demos/blob/humble/intra_process_demo/src/two_node_pipeline/two_node_pipeline.cpp) exceptionally.
 
 ## how-to build
 
