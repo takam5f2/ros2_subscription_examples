@@ -11,7 +11,7 @@ These example programs consist of four pakages.
 * [intra_process_examples](./intra_process_examples)
 * [waitset_examples](./waitset_examples)
 
-These are based on taker-listener in [GitHub - ros2/demos at humble](https://github.com/ros2/demos/tree/humble). If you understand the talker-listener, you can also understand these sample codes. Only `intra_process_examples` is based on [demos/intra_process_demo/src/two_node_pipeline/two_node_pipeline.cpp at humble · ros2/demos](https://github.com/ros2/demos/blob/humble/intra_process_demo/src/two_node_pipeline/two_node_pipeline.cpp) exceptionally.
+These are based on taker-listener in [GitHub - ros2/demos at humble](https://github.com/ros2/demos/tree/humble). If you know the talker-listener well, you can also understand these sample codes. Only `intra_process_examples` is based on [demos/intra_process_demo/src/two_node_pipeline/two_node_pipeline.cpp at humble · ros2/demos](https://github.com/ros2/demos/blob/humble/intra_process_demo/src/two_node_pipeline/two_node_pipeline.cpp) exceptionally.
 
 ## how-to build
 
@@ -42,7 +42,7 @@ The talker supports some additional options unlike the talker of [GitHub - ros2/
 ros2 run simple_examples talker --ros-args -p update_frequency:=2.0
 ```
 
-If you want to use multiple options, you need to use `-p` for each option as `-p option_ars:=<value>`
+If you want to use multiple options, you can add subsequent options as `-p option_args:=<value>`.
 
 #### talker nodes list
 
@@ -105,8 +105,8 @@ Below is the list of listener nodes included in simple_examples package.
       - specify Subscription Queue size which stores `/chatter` message
 * `timer_listener_using_callback`
   - behavior overview
-    - driven by timer periodically to execute a callback function in which a message is obtained from Subscription
-    - then execute a callback function which is registered to Subscription using `take_type_erased()` and `handle_message()`
+    - driven by timer periodically to execute a callback function in which a message is obtained from Subscription using `take_type_erased()`
+    - then execute a callback function which is registered to Subscription using `handle_message()`
   - option
     - `update_frequency` (float)
       - specify timer frequency
@@ -143,7 +143,7 @@ Below is the list of listener nodes included in simple_examples package.
 
 ### `intra_process_talker_listener`
 
-There is a sample code in `intra_process_talker_listener` in which a topic message is obtained by `take_data()` method and then processed by a callback function through `execute()` method. Publisher and Subscription program are run by a launch file because intra-process communication is performed between Composable Nodes in Autoware.
+There is a sample code in `intra_process_talker_listener` in which a topic message is obtained by `take_data()` method and then processed by a callback function through `execute()` method. Publisher and Subscription program run by a launch file because intra-process communication is performed between Composable Nodes in Autoware.
 
 #### run by launcher
 
@@ -192,15 +192,12 @@ Below is the list of launch files included in intra_process_talker_listener pack
     - `use_intra_process_comms` (boolean)
       - enable intra-process communication
       - default is true
-    - `use_transient_local` (boolean)
-      - enable Transient Local of Subscription
-      - default is false
 
 ### `intra_process_example`
 
 Intra-process communication is used between Composable Nodes in Autoware.
 But intra-process communication also can be used between nodes on MultiThreadedExecutor to which they are registered, which you can see in `intra_process_example`.
-`/consumer` and `/producer` nodes run in `intra_process_example`. `/producer` publishes a topic message and `/consumer` obtains it.
+`/consumer` and `/producer` nodes run in `intra_process_example` and `/producer` publishes a topic message and `/consumer` obtains it.
 
 #### run
 
@@ -224,7 +221,7 @@ ros2 run waitset_examples talker_triple
 
 #### talker node list
 
-There is only one node as talker.
+There is only one node as talker in waitset_examples.
 
 * `talker_triple`
   - behavior overview
@@ -238,7 +235,7 @@ There is only one node as talker.
       - specify output frequency of messages
       - default is 1.0
     - `use_transient_local` (boolean)
-      - enable Transient Local of Subscription
+      - enable Transient Local of Publisher
       - default is false
 
 #### run listener
@@ -259,7 +256,7 @@ Below is the list of listener nodes included in waitset_examples.
   - option
     - `update_frequency` (float)
       - specify timer frequency
-      - default is 0.2
+      - default is 1.0
     - `use_transient_local` (boolean)
       - enable Transient Local of Subscription
       - default is false
@@ -270,20 +267,20 @@ Below is the list of listener nodes included in waitset_examples.
   - option
     - `update_frequency` (float)
       - specify timer frequency
-      - default is 0.2
+      - default is 1.0
     - `use_transient_local` (boolean)
       - enable Transient Local of Subscription
       - default is false
-* `timer_listener_wait_some_period`
+* `timer_listener_single_wait_some_period`
   - behavior overview
     - driven by timer periodically to execute a callback function in which a `/chatter` message is obtained from Subscription Queue after verifying that there is a message in the queue by waitset
-    - timeout is set when queries waitset at that time
+    - timeout is set when query waitset at that time
     - if no trigger, treat the result as timeout
     - else print the obtained message
   - option
     - `update_frequency` (float)
       - specify timer frequency
-      - default is 0.2
+      - default is 1.0
     - `use_transient_local` (boolean)
       - enable Transient Local of Subscription
       - default is false
@@ -306,50 +303,51 @@ Below is the list of listener nodes included in waitset_examples.
 * `timer_listener_triple_sync`
   - behavior overview
     - driven by timer periodically to execute a callback function in which `/chatter`, `/slower_chatter`, and `/slowest_chatter` messages are obtained from each Subscription Queue
-    - the messages are obtained if one or more messages are in each Subscription Queue of `/chatter`, `/slower_chatter`, and `/slowest_chatter`
+    - the messages are obtained only when one or more messages in each Subscription Queue of `/chatter`, `/slower_chatter`, and `/slowest_chatter` get together
     - waitset is used to verify it
   - option
     - `update_frequency` (float)
       - specify timer frequency
-      - default is 0.2
+      - default is 1.0
     - `use_transient_local` (boolean)
       - enable Transient Local of Subscription
       - default is false
 * `timer_listener_triple_async`
   - behavior overview
     - driven by timer periodically to execute a callback function in which `/chatter`, `/slower_chatter`, and `/slowest_chatter` messages are obtained from each Subscription Queue
-    - the messages are obtained if one or more messages are in any Subscription Queue of `/chatter`, `/slower_chatter`, and `/slowest_chatter`
+    - the messages are obtained if one or more messages are in each Subscription Queue of `/chatter`, `/slower_chatter`, and `/slowest_chatter`
+    - the number of the messages is at most one from each Subscription Queue
     - waitset is used to verify it
   - option
     - `update_frequency` (float)
       - specify timer frequency
-      - default is 0.2
+      - default is 1.0
     - `use_transient_local` (boolean)
       - enable Transient Local of Subscription
       - default is false
 * `timer_listener_triple_separated_waitset`
   - behavior overview
-    - driven by timer periodically to execute a callback function in which `/chatter`, `/slower_chatter`, and `/slowest_chatter` messages are obtained from each Subscription Queue
-    - the messages are obtained if one or more messages are in any Subscription Queue of `/chatter`, `/slower_chatter`, and `/slowest_chatter`
-    - three waitsets are used to verify it unlike `timer_listener_triple_async`, in which one waitset is used
+    - driven by three timers periodically to execute a callback function in which `/chatter`, `/slower_chatter`, and `/slowest_chatter` messages are obtained from each Subscription Queue
+    - the messages are obtained if one or more messages are in each Subscription Queue of `/chatter`, `/slower_chatter`, and `/slowest_chatter`
+    - dedicated three waitsets are used to verify it unlike `timer_listener_triple_async`, in which one waitset is used
   - option
     - `update_frequency` (float)
       - specify timer frequency
-      - default is 0.2
+      - default is 1.0
     - `use_transient_local` (boolean)
       - enable Transient Local of Subscription
       - default is false
 * `timer_listener_triple_sync_intra`
   - behavior overview
     - similar to `timer_listener_triple_sync`
-    - support intra-process communication unlike `timer_listener_triple_sync`, in which only inter-process communication can be used
+    - support intra-process communication unlike `timer_listener_triple_sync` in which only inter-process communication can be used
     - run the following command for this node to run
       - `ros2 launch waitset_examples talker_listener_triple_intra.launch.py use_intra_process_comms:=true`
       - if `use_intra_process_comms` is set to false, communication is performed through DDS
   - option
     - `update_frequency` (float)
       - specify timer frequency
-      - default is 0.2
+      - default is 1.0
     - `use_transient_local` (boolean)
       - enable Transient Local of Subscription
       - default is false
@@ -357,12 +355,12 @@ Below is the list of listener nodes included in waitset_examples.
   - behavior overview
     - driven by timer periodically to execute a callback function in which `/chatter` and `/slower_chatter` messages are obtained from each Subscription Queue
     - `rclcpp::StaticWaitSet` is used instead of `rclcpp::WaitSet`
-    - note that triggers can be registered to `rclcpp::StaticWaitSet` only at initialization unlike `rclcpp::WaitSet`, to which triggers can be registered at any time
+    - note that triggers can be registered to `rclcpp::StaticWaitSet` only at initialization unlike `rclcpp::WaitSet` to which triggers can be registered at any time
     - also refer to [examples/rclcpp/wait_set/src/static_wait_set.cpp at rolling · ros2/examples](https://github.com/ros2/examples/blob/rolling/rclcpp/wait_set/src/static_wait_set.cpp)
   - option
     - `update_frequency` (float)
       - specify timer frequency
-      - default is 0.2
+      - default is 1.0
     - `use_transient_local` (boolean)
       - enable Transient Local of Subscription
       - default is false
@@ -370,15 +368,15 @@ Below is the list of listener nodes included in waitset_examples.
   - behavior overview
     - run two timers one of which is `timer_` and another is `much_slower_timer_`
     - `timer_` is invoked per specified frequency and execute its callback function
-    - `much_slower_timer_` is invoked per one tenth of frequency
+    - `much_slower_timer_` is invoked per one tenth of frequency of `timer_`
     - `much_slower_timer_` has its callback function but it is not registered to Executor
     - the callback function of `timer_` is executed periodically in which it is verified that `much_slower_timer_` has been invoked or not by waitset
-    - if yes, execute the callback function of `much_slower_timer_` by `execute_callback()`
+    - if yes, execute the callback function of `much_slower_timer_` through `execute_callback()`
     - at that time it is verified that Subscription of `/slower_chatter` has been invoked or not by another waitset
   - option
     - `update_frequency` (float)
       - specify timer frequency
-      - default is 0.2
+      - default is 1.0
     - `use_transient_local` (boolean)
       - enable Transient Local of Subscription
       - default is false
