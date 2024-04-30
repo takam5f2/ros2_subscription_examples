@@ -15,7 +15,7 @@ These are based on taker-listener in [GitHub - ros2/demos at humble](https://git
 
 ## how-to build
 
-```
+```console
 mkdir ros2_subscription_test
 cd ros2_subscription_test
 git clone git@github.com:takam5f2/ros2_subscription_examples.git
@@ -34,13 +34,13 @@ You need two terminals one of which is for talker and another for listener.
 
 Execute command below to run talker node on a terminal.
 
-```
+```console
 ros2 run simple_examples [talker node]
 ```
 
 The talker supports some additional options unlike the talker of [GitHub - ros2/demos at humble](https://github.com/ros2/demos/tree/humble). For example, you can change frequency of output of messages by `update_frequency` option as below.
 
-```
+```console
 ros2 run simple_examples talker --ros-args -p update_frequency:=2.0
 ```
 
@@ -69,7 +69,7 @@ Below is the list of talker nodes included in simple_examples package.
 
 Execute command below to run listener node on another terminal.
 
-```
+```console
 ros2 run simple_examples [listener node]
 ```
 
@@ -152,13 +152,13 @@ There is a sample code in `intra_process_talker_listener` in which a topic messa
 
 Execute command below to run `talker_listener_intra_process.launch.py`.
 
-```
+```console
 ros2 launch intra_process_talker_listener talker_listener_intra_process.launch.py
 ```
 
 The launch file supports some options. Below is an example to use `use_intra_process_comms` option.
 
-```
+```console
 ros2 launch intra_process_talker_listener talker_listener_intra_process.launch.py use_intra_process_comms:=false
 ```
 
@@ -207,7 +207,7 @@ But intra-process communication also can be used between nodes on MultiThreadedE
 
 Execute command below to run `two_node_pipeline_timer`.
 
-```
+```console
  ros2 run intra_process_examples two_node_pipeline_timer
 ```
 
@@ -221,7 +221,7 @@ You need two terminals one of which is for talker and another for listener.
 
 Execute command below to run talker node on a terminal.
 
-```
+```console
 ros2 run waitset_examples talker_triple
 ```
 
@@ -248,7 +248,7 @@ There is only one node as talker in waitset_examples.
 
 Execute command below to run listener node on another terminal.
 
-```
+```console
 ros2 run simple_examples [listener node]
 ```
 
