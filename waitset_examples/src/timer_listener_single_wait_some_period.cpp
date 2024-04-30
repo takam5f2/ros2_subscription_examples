@@ -99,7 +99,7 @@ public:
     subscription_options.callback_group = cb_group_noexec;
 
     rclcpp::QoS qos(rclcpp::KeepLast(10));
-    if (use_transient_local) { 
+    if (use_transient_local) {
       qos = qos.transient_local();
     }
 
@@ -126,7 +126,7 @@ private:
   rclcpp::TimerBase::SharedPtr timer_;
   rclcpp::WaitSet wait_set_;
   double waiting_time_;
-  
+
 };
 
 }  // namespace waitset_examples

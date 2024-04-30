@@ -6,10 +6,10 @@ Example programs for demonstrating data read from subscription of ROS 2.
 
 These example programs consist of four pakages.
 
-* [simple_examples](./simple_examples)
-* [intra_process_talker_listener](./intra_process_talker_listener)
-* [intra_process_examples](./intra_process_examples)
-* [waitset_examples](./waitset_examples)
+- [simple_examples](./simple_examples)
+- [intra_process_talker_listener](./intra_process_talker_listener)
+- [intra_process_examples](./intra_process_examples)
+- [waitset_examples](./waitset_examples)
 
 These are based on taker-listener in [GitHub - ros2/demos at humble](https://github.com/ros2/demos/tree/humble). If you know the talker-listener well, you can also understand these sample codes. Only `intra_process_examples` is based on [demos/intra_process_demo/src/two_node_pipeline/two_node_pipeline.cpp at humble · ros2/demos](https://github.com/ros2/demos/blob/humble/intra_process_demo/src/two_node_pipeline/two_node_pipeline.cpp) exceptionally.
 
@@ -33,11 +33,13 @@ You need two terminals one of which is for talker and another for listener.
 #### run talker
 
 Execute command below to run talker node on a terminal.
+
 ```
 ros2 run simple_examples [talker node]
 ```
 
 The talker supports some additional options unlike the talker of [GitHub - ros2/demos at humble](https://github.com/ros2/demos/tree/humble). For example, you can change frequency of output of messages by `update_frequency` option as below.
+
 ```
 ros2 run simple_examples talker --ros-args -p update_frequency:=2.0
 ```
@@ -48,7 +50,7 @@ If you want to use multiple options, you can add subsequent options as `-p optio
 
 Below is the list of talker nodes included in simple_examples package.
 
-* `talker`
+- `talker`
   - behavior overview
     - output `/chatter` topic per specified frequency
   - option
@@ -58,7 +60,7 @@ Below is the list of talker nodes included in simple_examples package.
     - `use_transient_local` (boolean)
       - enable Transient Local of Publisher
       - default is false
-* `serialized_message_talker`
+- `serialized_message_talker`
   - behavior overview
     - output `/chatter` of SerializedMessage type per one second
   - no option
@@ -66,6 +68,7 @@ Below is the list of talker nodes included in simple_examples package.
 #### run listener
 
 Execute command below to run listener node on another terminal.
+
 ```
 ros2 run simple_examples [listener node]
 ```
@@ -76,7 +79,7 @@ The listener of [ros2_subscription_examples/simple_examples at main · takam5f2/
 
 Below is the list of listener nodes included in simple_examples package.
 
-* `timer_listener`
+- `timer_listener`
   - behavior overview
     - driven by timer periodically to execute a callback function in which a message is obtained from Subscription
     - output the obtained message of `/chatter`
@@ -90,7 +93,7 @@ Below is the list of listener nodes included in simple_examples package.
     - `printout_message_info` (boolean)
       - enable to print MessageInfo
       - default is false
-* `timer_batch_listener`
+- `timer_batch_listener`
   - behavior overview
     - driven by timer periodically to execute a callback function in which multiple messages are obtained from Subscription Queue until the queue becomes empty
     - output all obtained messages
@@ -103,7 +106,7 @@ Below is the list of listener nodes included in simple_examples package.
       - default is false
     - `queue_size` (integer)
       - specify Subscription Queue size which stores `/chatter` message
-* `timer_listener_using_callback`
+- `timer_listener_using_callback`
   - behavior overview
     - driven by timer periodically to execute a callback function in which a message is obtained from Subscription using `take_type_erased()`
     - then execute a callback function which is registered to Subscription using `handle_message()`
@@ -114,7 +117,7 @@ Below is the list of listener nodes included in simple_examples package.
     - `use_transient_local` (boolean)
       - enable Transient Local of Subscription
       - default is false
-* `timer_listener_using_normal_function`
+- `timer_listener_using_normal_function`
   - behavior overview
     - driven by timer periodically to execute a callback function in which a message is obtained from Subscription
     - then execute a simple function
@@ -126,7 +129,7 @@ Below is the list of listener nodes included in simple_examples package.
     - `use_transient_local` (boolean)
       - enable Transient Local of Subscription
       - default is false
-* `timer_serialized_message_listener`
+- `timer_serialized_message_listener`
   - behavior overview
     - driven by timer periodically to execute a callback function in which a message is obtained from Subscription
     - the message is of SerializedMessage type
@@ -148,6 +151,7 @@ There is a sample code in `intra_process_talker_listener` in which a topic messa
 #### run by launcher
 
 Execute command below to run `talker_listener_intra_process.launch.py`.
+
 ```
 ros2 launch intra_process_talker_listener talker_listener_intra_process.launch.py
 ```
@@ -164,7 +168,7 @@ If `use_intra_process_comms` is set to `false`, communication between nodes is p
 
 Below is the list of launch files included in intra_process_talker_listener package.
 
-* talker_listener_intra_process.launch.py
+- talker_listener_intra_process.launch.py
   - behavior overview
     - run `talker_intra_process` and `timer_listener_intra_process`
     - `talker_intra_process` publishes `/chatter` message and `timer_listener_intra_process` obtains it
@@ -183,7 +187,7 @@ Below is the list of launch files included in intra_process_talker_listener pack
     - `use_transient_local` (boolean)
       - enable Transient Local of Publisher and Subscription
       - default is false
-* talker_batch_listener_intra_process.launch.py
+- talker_batch_listener_intra_process.launch.py
   - behavior overview
     - run `talker_intra_process` and `timer_batch_listener_intra_process`
     - `talker_intra_process` publishes `/chatter` message and `timer_batch_listener_intra_process` obtains it
@@ -202,6 +206,7 @@ But intra-process communication also can be used between nodes on MultiThreadedE
 #### run
 
 Execute command below to run `two_node_pipeline_timer`.
+
 ```
  ros2 run intra_process_examples two_node_pipeline_timer
 ```
@@ -215,6 +220,7 @@ You need two terminals one of which is for talker and another for listener.
 #### run talker
 
 Execute command below to run talker node on a terminal.
+
 ```
 ros2 run waitset_examples talker_triple
 ```
@@ -223,7 +229,7 @@ ros2 run waitset_examples talker_triple
 
 There is only one node as talker in waitset_examples.
 
-* `talker_triple`
+- `talker_triple`
   - behavior overview
     - publish `/chatter`, `/slower_chatter`, and `/slowest_chatter` topics per each specified frequency
     - `/slower_chatter` and `/slowest_chatter` are not published if there is no Subscription which subscribes them
@@ -241,6 +247,7 @@ There is only one node as talker in waitset_examples.
 #### run listener
 
 Execute command below to run listener node on another terminal.
+
 ```
 ros2 run simple_examples [listener node]
 ```
@@ -249,7 +256,7 @@ ros2 run simple_examples [listener node]
 
 Below is the list of listener nodes included in waitset_examples.
 
-* `timer_listener_single`
+- `timer_listener_single`
   - behavior overview
     - driven by timer periodically to execute a callback function in which a `/chatter` message is obtained from Subscription Queue after verifying that there is a message in the queue by waitset
     - print the obtained message by `RCLCPP_INFO`
@@ -260,7 +267,7 @@ Below is the list of listener nodes included in waitset_examples.
     - `use_transient_local` (boolean)
       - enable Transient Local of Subscription
       - default is false
-* `timer_listener_using_callback`
+- `timer_listener_using_callback`
   - behavior overview
     - driven by timer periodically to execute a callback function in which a `/chatter` message is obtained from Subscription Queue after verifying that there is a message in the queue by waitset
     - `take_type_erased()` and `handle_message()` are used at that time, which is ther manner performed inside Executor
@@ -271,7 +278,7 @@ Below is the list of listener nodes included in waitset_examples.
     - `use_transient_local` (boolean)
       - enable Transient Local of Subscription
       - default is false
-* `timer_listener_single_wait_some_period`
+- `timer_listener_single_wait_some_period`
   - behavior overview
     - driven by timer periodically to execute a callback function in which a `/chatter` message is obtained from Subscription Queue after verifying that there is a message in the queue by waitset
     - timeout is set when query waitset at that time
@@ -287,7 +294,7 @@ Below is the list of listener nodes included in waitset_examples.
     - `waiting_time` (float)
       - specify timeout value
       - default is 4.0
-* `timer_batch_listener_single`
+- `timer_batch_listener_single`
   - behavior overview
     - driven by timer periodically to execute a callback function in which a `/chatter` message is obtained from Subscription Queue until the queue becomes empty after verifying that there are messages in the queue by waitset
   - option
@@ -300,7 +307,7 @@ Below is the list of listener nodes included in waitset_examples.
     - `queue_size` (integer)
       - specify Subscription Queue size
       - default is 10
-* `timer_listener_triple_sync`
+- `timer_listener_triple_sync`
   - behavior overview
     - driven by timer periodically to execute a callback function in which `/chatter`, `/slower_chatter`, and `/slowest_chatter` messages are obtained from each Subscription Queue
     - the messages are obtained only when one or more messages in each Subscription Queue of `/chatter`, `/slower_chatter`, and `/slowest_chatter` get together
@@ -312,7 +319,7 @@ Below is the list of listener nodes included in waitset_examples.
     - `use_transient_local` (boolean)
       - enable Transient Local of Subscription
       - default is false
-* `timer_listener_triple_async`
+- `timer_listener_triple_async`
   - behavior overview
     - driven by timer periodically to execute a callback function in which `/chatter`, `/slower_chatter`, and `/slowest_chatter` messages are obtained from each Subscription Queue
     - the messages are obtained if one or more messages are in each Subscription Queue of `/chatter`, `/slower_chatter`, and `/slowest_chatter`
@@ -325,7 +332,7 @@ Below is the list of listener nodes included in waitset_examples.
     - `use_transient_local` (boolean)
       - enable Transient Local of Subscription
       - default is false
-* `timer_listener_triple_separated_waitset`
+- `timer_listener_triple_separated_waitset`
   - behavior overview
     - driven by three timers periodically to execute a callback function in which `/chatter`, `/slower_chatter`, and `/slowest_chatter` messages are obtained from each Subscription Queue
     - the messages are obtained if one or more messages are in each Subscription Queue of `/chatter`, `/slower_chatter`, and `/slowest_chatter`
@@ -337,7 +344,7 @@ Below is the list of listener nodes included in waitset_examples.
     - `use_transient_local` (boolean)
       - enable Transient Local of Subscription
       - default is false
-* `timer_listener_triple_sync_intra`
+- `timer_listener_triple_sync_intra`
   - behavior overview
     - similar to `timer_listener_triple_sync`
     - support intra-process communication unlike `timer_listener_triple_sync` in which only inter-process communication can be used
@@ -351,7 +358,7 @@ Below is the list of listener nodes included in waitset_examples.
     - `use_transient_local` (boolean)
       - enable Transient Local of Subscription
       - default is false
-* `timer_listener_twin_static`
+- `timer_listener_twin_static`
   - behavior overview
     - driven by timer periodically to execute a callback function in which `/chatter` and `/slower_chatter` messages are obtained from each Subscription Queue
     - `rclcpp::StaticWaitSet` is used instead of `rclcpp::WaitSet`
@@ -364,7 +371,7 @@ Below is the list of listener nodes included in waitset_examples.
     - `use_transient_local` (boolean)
       - enable Transient Local of Subscription
       - default is false
-* `timer_listener_twin_nested_waitset`
+- `timer_listener_twin_nested_waitset`
   - behavior overview
     - run two timers one of which is `timer_` and another is `much_slower_timer_`
     - `timer_` is invoked per specified frequency and execute its callback function

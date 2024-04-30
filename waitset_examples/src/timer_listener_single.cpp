@@ -52,7 +52,7 @@ public:
       RCLCPP_INFO(this->get_logger(), "Timer triggered.");
 
       auto wait_result = wait_set_.wait(std::chrono::milliseconds(0));
-      if (wait_result.kind() == rclcpp::WaitResultKind::Ready && 
+      if (wait_result.kind() == rclcpp::WaitResultKind::Ready &&
           wait_result.get_wait_set().get_rcl_wait_set().subscriptions[0]) {
         RCLCPP_INFO(this->get_logger(), "wait_set tells that subscription is ready");
       } else {
@@ -89,7 +89,7 @@ public:
     subscription_options.callback_group = cb_group_noexec;
 
     rclcpp::QoS qos(rclcpp::KeepLast(10));
-    if (use_transient_local) { 
+    if (use_transient_local) {
       qos = qos.transient_local();
     }
 

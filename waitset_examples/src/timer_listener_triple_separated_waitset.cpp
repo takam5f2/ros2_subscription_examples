@@ -51,7 +51,7 @@ public:
 
       auto wait_result = wait_set_.wait(std::chrono::milliseconds(0));
 
-      if (wait_result.kind() == rclcpp::WaitResultKind::Ready && 
+      if (wait_result.kind() == rclcpp::WaitResultKind::Ready &&
           wait_result.get_wait_set().get_rcl_wait_set().subscriptions[0]) {
         std_msgs::msg::String msg;
         rclcpp::MessageInfo msg_info;
@@ -71,7 +71,7 @@ public:
 
       auto wait_result = slower_wait_set_.wait(std::chrono::milliseconds(0));
 
-      if (wait_result.kind() == rclcpp::WaitResultKind::Ready && 
+      if (wait_result.kind() == rclcpp::WaitResultKind::Ready &&
           wait_result.get_wait_set().get_rcl_wait_set().subscriptions[0]) {
         std_msgs::msg::String msg;
         rclcpp::MessageInfo msg_info;
@@ -91,7 +91,7 @@ public:
 
       auto wait_result = slowest_wait_set_.wait(std::chrono::milliseconds(0));
 
-      if (wait_result.kind() == rclcpp::WaitResultKind::Ready && 
+      if (wait_result.kind() == rclcpp::WaitResultKind::Ready &&
           wait_result.get_wait_set().get_rcl_wait_set().subscriptions[0]) {
         std_msgs::msg::String msg;
         rclcpp::MessageInfo msg_info;
@@ -114,7 +114,7 @@ public:
     subscription_options.callback_group = cb_group_noexec;
 
     rclcpp::QoS qos(rclcpp::KeepLast(10));
-    if (use_transient_local) { 
+    if (use_transient_local) {
       qos = qos.transient_local();
     }
 

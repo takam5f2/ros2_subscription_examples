@@ -97,7 +97,7 @@ public:
     subscription_options.callback_group = cb_group_noexec;
 
     rclcpp::QoS qos(rclcpp::KeepLast{static_cast<size_t>(queue_size)});
-    if (use_transient_local) { 
+    if (use_transient_local) {
       qos = qos.transient_local();
     }
 

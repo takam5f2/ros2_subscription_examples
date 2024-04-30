@@ -70,7 +70,7 @@ public:
     subscription_options.callback_group = cb_group_noexec;
 
     rclcpp::QoS qos(rclcpp::KeepLast(10));
-    if (use_transient_local) { 
+    if (use_transient_local) {
       qos = qos.transient_local();
     }
 
@@ -105,8 +105,8 @@ private:
   void receive_data_via_inter_process () {
 
     auto wait_result = wait_set_.wait(std::chrono::milliseconds(0));
-    if (wait_result.kind() == rclcpp::WaitResultKind::Ready && 
-        wait_result.get_wait_set().get_rcl_wait_set().subscriptions[0] && 
+    if (wait_result.kind() == rclcpp::WaitResultKind::Ready &&
+        wait_result.get_wait_set().get_rcl_wait_set().subscriptions[0] &&
         wait_result.get_wait_set().get_rcl_wait_set().subscriptions[1] &&
         wait_result.get_wait_set().get_rcl_wait_set().subscriptions[2]) {
       RCLCPP_INFO(this->get_logger(), "wait_set tells that all subscriptions are ready");
@@ -138,8 +138,8 @@ private:
   void receive_data_via_intra_process () {
     auto wait_result = wait_set_.wait(std::chrono::milliseconds(0));
     // TODO: intra process waitable の使い方がよくわからないので調査する. 今は syntax sugar で乗り切っている状態.
-    if (wait_result.kind() == rclcpp::WaitResultKind::Ready && 
-      subscriptions_array_[0]->get_intra_process_waitable()->is_ready(nullptr) && 
+    if (wait_result.kind() == rclcpp::WaitResultKind::Ready &&
+      subscriptions_array_[0]->get_intra_process_waitable()->is_ready(nullptr) &&
       subscriptions_array_[1]->get_intra_process_waitable()->is_ready(nullptr) &&
       subscriptions_array_[2]->get_intra_process_waitable()->is_ready(nullptr)) {
         RCLCPP_INFO(this->get_logger(), "wait_set tells that all subscriptions are ready(intra)");
