@@ -333,10 +333,9 @@ Below is the list of listener nodes included in the `waitset_examples` package.
       - enable Transient Local of Subscription
       - default is false
 - `timer_listener_triple_separated_waitset`
-  - behavior overview
-    - driven by three timers periodically to execute a callback function in which `/chatter`, `/slower_chatter`, and `/slowest_chatter` messages are obtained from each Subscription Queue
-    - the messages are obtained if one or more messages are in each Subscription Queue of `/chatter`, `/slower_chatter`, and `/slowest_chatter`
-    - dedicated three waitsets are used to verify it unlike `timer_listener_triple_async`, in which one waitset is used
+  - behavior
+    - Its behavior is same as that of `timer_listener_triple_async`
+    - It has three `rclcpp::WaitSet` based objects, each of which is provided per subscription while a single `rclcpp::WaitSet` based objects checks the three subscriptions in `timer_listener_triple_async`
   - option
     - `update_frequency` (float)
       - specify timer frequency
