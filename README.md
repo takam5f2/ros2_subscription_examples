@@ -271,7 +271,7 @@ Below is the list of listener nodes included in the `waitset_examples` package.
       - default is false
 - `timer_listener_using_callback`
   - behavior
-    - driven by timer periodically to execute a callback function in which a `/chatter` message is obtained from Subscription Queue after verifying that there is a message in the queue by waitset
+    - It has a cyclic timer to execute a callback function in which a `/chatter` message processed with the combination of `take_type_erased()` and `handle_message()` after arrival of a message is checked with `rlcpp::WaitSet`
     - `take_type_erased()` and `handle_message()` are used at that time, which is ther manner performed inside Executor
   - option
     - `update_frequency` (float)
