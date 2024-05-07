@@ -226,7 +226,7 @@ ros2 run waitset_examples talker_triple
 
 #### talker node list
 
-There is only one node as talker in waitset_examples.
+Only `talker_triple` is provided as talker node in the `waitset_examples` package.
 
 - `talker_triple`
   - behavior overview
