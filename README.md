@@ -52,7 +52,7 @@ Below is the list of talker nodes included in simple_examples package.
 
 - `talker`
   - behavior
-    - output `/chatter` topic per specified frequency
+    - it outputs a `/chatter` topic message per specified frequency
   - option
     - `update_frequency` (float)
       - specify output frequency of messages
