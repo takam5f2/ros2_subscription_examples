@@ -259,7 +259,7 @@ ros2 run simple_examples [listener node]
 Below is the list of listener nodes included in the `waitset_examples` package.
 
 - `timer_listener_single`
-  - behavior overview
+  - behavior
     - driven by timer periodically to execute a callback function in which a `/chatter` message is obtained from Subscription Queue after verifying that there is a message in the queue by waitset
     - print the obtained message by `RCLCPP_INFO`
   - option
