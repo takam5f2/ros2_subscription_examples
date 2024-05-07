@@ -260,7 +260,7 @@ Below is the list of listener nodes included in the `waitset_examples` package.
 
 - `timer_listener_single`
   - behavior
-    - driven by timer periodically to execute a callback function in which a `/chatter` message is obtained from Subscription Queue after verifying that there is a message in the queue by waitset
+    - It has a cyclic timer to execute a callback function in which a `/chatter` message is obtained from Subscription Queue after arrival of a message is checked with `rlcpp::WaitSet`
     - print the obtained message by `RCLCPP_INFO`
   - option
     - `update_frequency` (float)
