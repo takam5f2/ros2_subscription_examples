@@ -324,9 +324,7 @@ Below is the list of listener nodes included in the `waitset_examples` package.
 - `timer_listener_triple_async`
   - behavior
     - It has a cyclic timer to execute a callback function in which `/chatter`, `/slower_chatter`, and `/slowest_chatter` messages are obtained from each Subscription Queue. If one of the three subscriptions has any message, it is taken
-    - the messages are obtained if one or more messages are in each Subscription Queue of `/chatter`, `/slower_chatter`, and `/slowest_chatter`
-    - the number of the messages is at most one from each Subscription Queue
-    - waitset is used to verify it
+    - `rclcpp::WaitSet` tests whether or not any of the subscriptions receives any message
   - option
     - `update_frequency` (float)
       - specify timer frequency
