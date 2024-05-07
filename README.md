@@ -272,7 +272,7 @@ Below is the list of listener nodes included in the `waitset_examples` package.
 - `timer_listener_using_callback`
   - behavior
     - It has a cyclic timer to execute a callback function in which a `/chatter` message processed with the combination of `take_type_erased()` and `handle_message()` after arrival of a message is checked with `rlcpp::WaitSet`
-    - `take_type_erased()` and `handle_message()` are used at that time, which is ther manner performed inside Executor
+    - It has the same behavior with `timer_listener_single`
   - option
     - `update_frequency` (float)
       - specify timer frequency
