@@ -344,10 +344,10 @@ Below is the list of listener nodes included in the `waitset_examples` package.
       - enable Transient Local of Subscription
       - default is false
 - `timer_listener_triple_sync_intra`
-  - behavior overview
-    - similar to `timer_listener_triple_sync`
-    - support intra-process communication unlike `timer_listener_triple_sync` in which only inter-process communication can be used
-    - run the following command for this node to run
+  - behavior
+    - Its behavior is similar to that of `timer_listener_triple_sync`
+    - It supports intra-process communication unlike `timer_listener_triple_sync` in which only inter-process communication can be used
+    - To demonstrate intra-process communication with the node, executes the launch file with the following command.
       - `ros2 launch waitset_examples talker_listener_triple_intra.launch.py use_intra_process_comms:=true`
       - if `use_intra_process_comms` is set to false, communication is performed through DDS
   - option
