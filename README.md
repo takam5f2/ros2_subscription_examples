@@ -362,7 +362,7 @@ Below is the list of listener nodes included in the `waitset_examples` package.
       - default is false
 - `timer_listener_twin_static`
   - behavior overview
-    - driven by timer periodically to execute a callback function in which `/chatter` and `/slower_chatter` messages are obtained from each Subscription Queue
+    - It has a cyclic timer to execute a callback function in which `/chatter` and `/slower_chatter` messages are obtained from each Subscription Queue
     - `rclcpp::StaticWaitSet` is used instead of `rclcpp::WaitSet`
     - note that triggers can be registered to `rclcpp::StaticWaitSet` only at initialization unlike `rclcpp::WaitSet` to which triggers can be registered at any time
     - also refer to [examples/rclcpp/wait_set/src/static_wait_set.cpp at rolling · ros2/examples](https://github.com/ros2/examples/blob/rolling/rclcpp/wait_set/src/static_wait_set.cpp)
