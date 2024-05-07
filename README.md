@@ -256,7 +256,7 @@ ros2 run simple_examples [listener node]
 
 #### listener nodes list
 
-Below is the list of listener nodes included in waitset_examples.
+Below is the list of listener nodes included in the `waitset_examples` package.
 
 - `timer_listener_single`
   - behavior overview
