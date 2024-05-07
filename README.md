@@ -218,7 +218,7 @@ You need two terminals; one is for talker and the other for listener.
 
 #### run talker
 
-Execute command below to run talker node on a terminal.
+Launch a terminal and execute talker node with the following command.
 
 ```console
 ros2 run waitset_examples talker_triple
