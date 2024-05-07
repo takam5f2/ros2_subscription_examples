@@ -231,7 +231,7 @@ Only `talker_triple` is provided as talker node in the `waitset_examples` packag
 - `talker_triple`
   - behavior
     - It transmits three kinds of topic messages; `/chatter`, `/slower_chatter` and `/slowest_chatter`. They have different transmission frequency.
-    - `/slower_chatter` and `/slowest_chatter` are not published if there is no Subscription which subscribes them
+    - `/slower_chatter` and `/slowest_chatter` are not transmitted if there is no corresponding subscription
     - `/chatter` is published per frequency specified by `update_frequency`
     - frequency of `/slower_chatter` is one half of that of `/chatter`
     - frequency of `/slowest_chatter` is one third of that of `/chatter`
