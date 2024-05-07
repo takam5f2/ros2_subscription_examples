@@ -229,7 +229,9 @@ ros2 run waitset_examples talker_triple
 Only `talker_triple` is provided as talker node in the `waitset_examples` package.
 
 - `talker_triple`
+
   - behavior
+
     - It transmits three kinds of topic messages; `/chatter`, `/slower_chatter` and `/slowest_chatter`. They have different transmission frequency.
     - `/slower_chatter` and `/slowest_chatter` are not transmitted if there is no corresponding subscription
     - `/chatter` is transmitted at frequency defined by `update_frequency`
