@@ -80,7 +80,7 @@ The listener of [ros2_subscription_examples/simple_examples at main · takam5f2/
 Below is the list of listener nodes included in simple_examples package.
 
 - `timer_listener`
-  - behavior overview
+  - behavior
     - driven by timer periodically to execute a callback function in which a message is obtained from Subscription
     - output the obtained message of `/chatter`
   - option
