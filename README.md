@@ -248,7 +248,7 @@ Only `talker_triple` is provided as talker node in the `waitset_examples` packag
 
 #### run listener
 
-Execute command below to run listener node on another terminal.
+Launch another terminal and execute a listener node with the following command.
 
 ```console
 ros2 run simple_examples [listener node]
