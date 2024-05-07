@@ -61,7 +61,7 @@ Below is the list of talker nodes included in simple_examples package.
       - enable Transient Local of Publisher
       - default is false
 - `serialized_message_talker`
-  - behavior overview
+  - behavior
     - output `/chatter` of SerializedMessage type per one second
   - no option
 
