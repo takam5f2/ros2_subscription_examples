@@ -234,7 +234,8 @@ Only `talker_triple` is provided as talker node in the `waitset_examples` packag
     - `/slower_chatter` and `/slowest_chatter` are not transmitted if there is no corresponding subscription
     - `/chatter` is transmitted at frequency defined by `update_frequency`
     - `/slower_chatter` is transmitted at one half of frequency defined by `update_frequency`
-    - frequency of `/slowest_chatter` is one third of that of `/chatter`
+    - `/slowest_chatter` is transmitted at one third of frequency defined by `update_frequency`
+
   - option
     - `update_frequency` (float)
       - specify output frequency of messages
