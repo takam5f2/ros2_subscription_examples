@@ -373,7 +373,7 @@ Below is the list of listener nodes included in the `waitset_examples` package.
 - `timer_listener_twin_nested_waitset`
   - behavior overview
     - It has two cyclic timers; one of which is `timer_` and another is `much_slower_timer_`
-    - `timer_` is invoked per specified frequency and execute its callback function
+    - `timer_` is invoked at the given frequency to execute its callback function
     - `much_slower_timer_` is invoked per one tenth of frequency of `timer_`
     - `much_slower_timer_` has its callback function but it is not registered to Executor
     - the callback function of `timer_` is executed periodically in which it is verified that `much_slower_timer_` has been invoked or not by waitset
