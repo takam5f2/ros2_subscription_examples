@@ -214,7 +214,7 @@ It has no particular option. ID of the thread which executes a timer callback fu
 
 ### `waitset_examples`
 
-You need two terminals one of which is for talker and another for listener.
+You need two terminals; one is for talker and the other for listener.
 
 #### run talker
 
