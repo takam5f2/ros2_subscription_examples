@@ -283,9 +283,9 @@ Below is the list of listener nodes included in the `waitset_examples` package.
 - `timer_listener_single_wait_some_period`
   - behavior
     - It has a cyclic timer to execute a callback function in which a `/chatter` message is obtained from Subscription Queue after arrival of a message is checked with `rlcpp::WaitSet`
-    - timeout is set when query waitset at that time
-    - if no trigger, treat the result as timeout
-    - else print the obtained message
+    - Duration for timeout is given as the  given as the argument of `wait`
+    - It prints out string data in a incoming message if it receives the message by the duration
+    - Otherwise it prints out that timeout occurs during waiting a message
   - option
     - `update_frequency` (float)
       - specify timer frequency
