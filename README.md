@@ -96,7 +96,7 @@ Below is the list of listener nodes included in simple_examples package.
 - `timer_batch_listener`
   - behavior
     - It has a cyclic timer to execute a callback function in which multiple messages are obtained from a subscription until the subscription queue becomes empty
-    - output all obtained messages
+    - It prints out string data, included in received `/chatter`, to the terminal
   - option
     - `update_frequency` (float)
       - specify timer frequency
