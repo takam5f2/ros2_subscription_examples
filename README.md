@@ -51,7 +51,7 @@ If you want to use multiple options, you can add subsequent options as `-p optio
 Below is the list of talker nodes included in simple_examples package.
 
 - `talker`
-  - behavior overview
+  - behavior
     - output `/chatter` topic per specified frequency
   - option
     - `update_frequency` (float)
