@@ -297,7 +297,7 @@ Below is the list of listener nodes included in the `waitset_examples` package.
       - specify timeout value
       - default is 4.0
 - `timer_batch_listener_single`
-  - behavior overview
+  - behavior
     - driven by timer periodically to execute a callback function in which a `/chatter` message is obtained from Subscription Queue until the queue becomes empty after verifying that there are messages in the queue by waitset
   - option
     - `update_frequency` (float)
