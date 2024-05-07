@@ -229,7 +229,7 @@ ros2 run waitset_examples talker_triple
 Only `talker_triple` is provided as talker node in the `waitset_examples` package.
 
 - `talker_triple`
-  - behavior overview
+  - behavior
     - publish `/chatter`, `/slower_chatter`, and `/slowest_chatter` topics per each specified frequency
     - `/slower_chatter` and `/slowest_chatter` are not published if there is no Subscription which subscribes them
     - `/chatter` is published per frequency specified by `update_frequency`
