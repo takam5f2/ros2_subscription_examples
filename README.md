@@ -146,7 +146,7 @@ Below is the list of listener nodes included in simple_examples package.
 
 ### `intra_process_talker_listener`
 
-There is a sample code in `intra_process_talker_listener` in which a topic message is obtained by `take_data()` method and then processed by a callback function through `execute()` method. Publisher and Subscription program run by a launch file because intra-process communication is performed between Composable Nodes in Autoware.
+There are a few sample programs in `intra_process_talker_listener` in which a topic message is obtained by `take_data()` method and then processed by a callback function through `execute()` method. Intra-process communication requires a pair of publisher and subscription is located on a same Linux process. Then a pair of listener and talker must be launched as composable nodes. The package provides two sample launch files to start listener and talker on a composable nodes.
 
 #### run by launcher
 
