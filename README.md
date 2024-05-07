@@ -188,10 +188,10 @@ Below is the list of launch files included in intra_process_talker_listener pack
       - enable Transient Local of Publisher and Subscription
       - default is false
 - talker_batch_listener_intra_process.launch.py
-  - behavior overview
-    - run `talker_intra_process` and `timer_batch_listener_intra_process`
-    - `talker_intra_process` publishes `/chatter` message and `timer_batch_listener_intra_process` obtains it
-    - `timer_batch_listener_intra_process` executes a callback function per five minutes in which topic messages are obtained from Subscription Queue until the queue becomes empty
+  - behavior
+    - It launches `talker_intra_process` and `timer_batch_listener_intra_process`
+    - `talker_intra_process` transmits `/chatter` message and `timer_batch_listener_intra_process` receives it
+    - `timer_batch_listener_intra_process` executes a callback function per five seconds in which topic messages are obtained from Subscription Queue until the queue becomes empty
   - option
     - `use_intra_process_comms` (boolean)
       - enable intra-process communication
