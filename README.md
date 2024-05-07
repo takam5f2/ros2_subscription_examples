@@ -38,7 +38,7 @@ Execute command below to run talker node on a terminal.
 ros2 run simple_examples [talker node]
 ```
 
-The talker supports some additional options unlike the talker of [GitHub - ros2/demos at humble](https://github.com/ros2/demos/tree/humble). For example, you can change frequency of output of messages by `update_frequency` option as below.
+The talker supports some additional options unlike the talker of [GitHub - ros2/demos at humble](https://github.com/ros2/demos/tree/humble). For example, you can change frequency of messages transmission by `update_frequency` option as below.
 
 ```console
 ros2 run simple_examples talker --ros-args -p update_frequency:=2.0
