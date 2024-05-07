@@ -310,8 +310,8 @@ Below is the list of listener nodes included in the `waitset_examples` package.
       - specify Subscription Queue size
       - default is 10
 - `timer_listener_triple_sync`
-  - behavior overview
-    - driven by timer periodically to execute a callback function in which `/chatter`, `/slower_chatter`, and `/slowest_chatter` messages are obtained from each Subscription Queue
+  - behavior
+    - It has a cyclic timer to execute a callback function in which `/chatter`, `/slower_chatter`, and `/slowest_chatter` messages are obtained from each Subscription Queue. If all of the three subscriptions have any message, they are taken at the same time
     - the messages are obtained only when one or more messages in each Subscription Queue of `/chatter`, `/slower_chatter`, and `/slowest_chatter` get together
     - waitset is used to verify it
   - option
