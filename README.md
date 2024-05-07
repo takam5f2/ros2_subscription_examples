@@ -169,11 +169,11 @@ If `use_intra_process_comms` is set to `false`, communication between nodes is p
 Below is the list of launch files included in intra_process_talker_listener package.
 
 - talker_listener_intra_process.launch.py
-  - behavior overview
-    - run `talker_intra_process` and `timer_listener_intra_process`
-    - `talker_intra_process` publishes `/chatter` message and `timer_listener_intra_process` obtains it
-    - if `use_intra_process_comms` is set to `true` intra-process communication is performed between the two nodes
-    - if `use_intra_process_comms` is set to `false` a communication through DDS is performed between the two nodes
+  - behavior
+    - It launches `talker_intra_process` and `timer_listener_intra_process`
+    - `talker_intra_process` transmits `/chatter` message and `timer_listener_intra_process` receives it
+    - if `use_intra_process_comms` is set to `true`, intra-process communication is performed between the two nodes
+    - if `use_intra_process_comms` is set to `false`, a communication through DDS is performed between the two nodes
   - option
     - `use_intra_process_comms` (boolean)
       - enable intra-process communication
