@@ -204,7 +204,7 @@ As well as using composable nodes, intra-process communication also can be used 
 
 #### run
 
-Execute command below to run `two_node_pipeline_timer`.
+Execute `two_node_pipeline_timer` with the following command.
 
 ```console
  ros2 run intra_process_examples two_node_pipeline_timer
