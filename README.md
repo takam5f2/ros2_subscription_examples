@@ -200,7 +200,7 @@ Below is the list of launch files included in intra_process_talker_listener pack
 ### `intra_process_example`
 
 Intra-process communication is used between Composable Nodes in Autoware.
-But intra-process communication also can be used between nodes on MultiThreadedExecutor to which they are registered, which you can see in `intra_process_example`.
+As well as using composable nodes, intra-process communication also can be used between nodes on MultiThreadedExecutor to which they are registered, which you can see in `intra_process_example`.
 `/consumer` and `/producer` nodes run in `intra_process_example` and `/producer` publishes a topic message and `/consumer` obtains it.
 
 #### run
