@@ -107,8 +107,8 @@ Below is the list of listener nodes included in simple_examples package.
     - `queue_size` (integer)
       - specify Subscription Queue size which stores `/chatter` message
 - `timer_listener_using_callback`
-  - behavior overview
-    - driven by timer periodically to execute a callback function in which a message is obtained from Subscription using `take_type_erased()`
+  - behavior
+    - It has a cyclic timer to execute a callback function in which a message is taken from the subscription using `take_type_erased()`
     - then execute a callback function which is registered to Subscription using `handle_message()`
   - option
     - `update_frequency` (float)
