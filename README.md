@@ -118,10 +118,10 @@ Below is the list of listener nodes included in simple_examples package.
       - enable Transient Local of Subscription
       - default is false
 - `timer_listener_using_normal_function`
-  - behavior overview
-    - driven by timer periodically to execute a callback function in which a message is obtained from Subscription
-    - then execute a simple function
-    - this listener is for contrast against `timer_listener_using_callback`
+  - behavior
+    - It has a cyclic timer to execute a callback function in which a message is obtained from Subscription
+    - Another subroutine is called from the callback function to print out string data included in a received message
+    - this listener is similar to `timer_listener_using_callback`, but it does not use `handle_message()`
   - option
     - `update_frequency` (float)
       - specify timer frequency
