@@ -270,7 +270,7 @@ Below is the list of listener nodes included in the `waitset_examples` package.
       - enable Transient Local of Subscription
       - default is false
 - `timer_listener_using_callback`
-  - behavior overview
+  - behavior
     - driven by timer periodically to execute a callback function in which a `/chatter` message is obtained from Subscription Queue after verifying that there is a message in the queue by waitset
     - `take_type_erased()` and `handle_message()` are used at that time, which is ther manner performed inside Executor
   - option
