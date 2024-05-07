@@ -82,7 +82,7 @@ Below is the list of listener nodes included in simple_examples package.
 - `timer_listener`
   - behavior
     - It has a cyclic timer to execute a callback function in which a message is taken from a subscription
-    - output the obtained message of `/chatter`
+    - It prints out string data, included in received `/chatter`, to the terminal
   - option
     - `update_frequency` (float)
       - specify timer frequency
