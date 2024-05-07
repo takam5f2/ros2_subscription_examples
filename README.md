@@ -298,7 +298,7 @@ Below is the list of listener nodes included in the `waitset_examples` package.
       - default is 4.0
 - `timer_batch_listener_single`
   - behavior
-    - driven by timer periodically to execute a callback function in which a `/chatter` message is obtained from Subscription Queue until the queue becomes empty after verifying that there are messages in the queue by waitset
+    - It has a cyclic timer to execute a callback function in which a `/chatter` message is obtained from Subscription Queue until the queue becomes empty after after arrival of a message is checked with `rlcpp::WaitSet`
   - option
     - `update_frequency` (float)
       - specify timer frequency
