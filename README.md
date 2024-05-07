@@ -94,7 +94,7 @@ Below is the list of listener nodes included in simple_examples package.
       - enable to print MessageInfo
       - default is false
 - `timer_batch_listener`
-  - behavior 
+  - behavior
     - It has a cyclic timer to execute a callback function in which multiple messages are obtained from a subscription until the subscription queue becomes empty
     - output all obtained messages
   - option
