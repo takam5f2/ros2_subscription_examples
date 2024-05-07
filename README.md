@@ -109,7 +109,7 @@ Below is the list of listener nodes included in simple_examples package.
 - `timer_listener_using_callback`
   - behavior
     - It has a cyclic timer to execute a callback function in which a message is taken from the subscription using `take_type_erased()`
-    -  `handle_message()` is called to execute a callback function which is registered to the subscription during execution of the timer-based callback function
+    - `handle_message()` is called to execute a callback function which is registered to the subscription during execution of the timer-based callback function
   - option
     - `update_frequency` (float)
       - specify timer frequency
