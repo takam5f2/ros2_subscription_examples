@@ -130,9 +130,9 @@ Below is the list of listener nodes included in simple_examples package.
       - enable Transient Local of Subscription
       - default is false
 - `timer_serialized_message_listener`
-  - behavior overview
-    - driven by timer periodically to execute a callback function in which a message is obtained from Subscription
-    - the message is of SerializedMessage type
+  - behavior 
+    - It has a cyclic timer to execute a callback function in which a message is obtained from Subscription
+    - the data type of the message is SerializedMessage
     - this listener should run together with `serialized_message_talker`
   - option
     - `update_frequency` (float)
