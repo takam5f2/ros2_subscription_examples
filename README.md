@@ -210,7 +210,7 @@ Execute `two_node_pipeline_timer` with the following command.
  ros2 run intra_process_examples two_node_pipeline_timer
 ```
 
-It has no particular option. A cyclic timer invokes the corresponding callback function. Another callback function, which is corresponding to the subscription, is called from the timer based callback function if a incoming message arrives.  `two_node_pipeline_timer` shows two thread ID (TID); one is printed out from the timer based callback function and the other is from the subscription based one. They should be same number because their callback function should be executed on a same thread.
+It has no particular option. A cyclic timer invokes the corresponding callback function. Another callback function, which is corresponding to the subscription, is called from the timer based callback function if a incoming message arrives. `two_node_pipeline_timer` shows two thread ID (TID); one is printed out from the timer based callback function and the other is from the subscription based one. They should be same number because their callback function should be executed on a same thread.
 
 ### `waitset_examples`
 
