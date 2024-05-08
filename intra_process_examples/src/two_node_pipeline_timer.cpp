@@ -76,7 +76,7 @@ struct Consumer : public rclcpp::Node
     sub_ = this->create_subscription<std_msgs::msg::Int32>(
         input,
         10,
-        [](std_msgs::msg::Int32::UniquePtr msg) 
+        [](std_msgs::msg::Int32::UniquePtr msg)
         {
           printf(
               " Received message with value: %d, and address: 0x%" PRIXPTR "\n", msg->data,

@@ -78,7 +78,7 @@ public:
     subscription_options.callback_group = cb_group_noexec;
 
     rclcpp::QoS qos(rclcpp::KeepLast(10));
-    if (use_transient_local) { 
+    if (use_transient_local) {
       qos = qos.transient_local();
     }
 
@@ -107,7 +107,7 @@ private:
 
     rmw_time_point_value_t received_timestamp =  msg_info.get_rmw_message_info().received_timestamp;
     const int32_t received_timestamp_sec = received_timestamp / 1000000000;
-    const uint32_t received_timestamp_nsec = received_timestamp % 1000000000;    
+    const uint32_t received_timestamp_nsec = received_timestamp % 1000000000;
     RCLCPP_INFO(this->get_logger(), "Message is received at : %d.%d", received_timestamp_sec, received_timestamp_nsec);
 
     RCLCPP_INFO(this->get_logger(), "publication sequence number: %ld", msg_info.get_rmw_message_info().publication_sequence_number);

@@ -31,14 +31,14 @@ def generate_launch_description():
         executable='component_container',
         composable_node_descriptions=[
             ComposableNode(
-                package='waitset_examples', 
+                package='waitset_examples',
                 plugin='waitset_examples::TalkerTriple',
                 name='talker_triple',
                 namespace='',
                 extra_arguments=[{'use_intra_process_comms': use_intra_process_comms_value}]
             ),
             ComposableNode(
-                package='waitset_examples', 
+                package='waitset_examples',
                 plugin='waitset_examples::TimerListenerTripleSyncIntra',
                 name='timer_listener_triple_sync_intra',
                 namespace='',

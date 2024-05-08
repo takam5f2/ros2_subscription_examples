@@ -53,7 +53,7 @@ public:
       RCLCPP_INFO(this->get_logger(), "Timer triggered.");
 
       auto wait_result = wait_set_.wait(std::chrono::milliseconds(0));
-      if (wait_result.kind() == rclcpp::WaitResultKind::Ready && 
+      if (wait_result.kind() == rclcpp::WaitResultKind::Ready &&
           wait_result.get_wait_set().get_rcl_wait_set().subscriptions[0]) {
         std_msgs::msg::String msg;
         rclcpp::MessageInfo msg_info;
@@ -64,7 +64,7 @@ public:
         RCLCPP_INFO(this->get_logger(), "wait_set tells that normal subscription is not ready and return");
       }
 
-      if (wait_result.kind() == rclcpp::WaitResultKind::Ready && 
+      if (wait_result.kind() == rclcpp::WaitResultKind::Ready &&
           wait_result.get_wait_set().get_rcl_wait_set().timers[0]) {
             much_slower_timer_->execute_callback();
       }
@@ -76,7 +76,7 @@ public:
       RCLCPP_INFO(this->get_logger(), "Much Slower Timer triggered.");
 
       auto sub_wait_result = sub_wait_set_.wait(std::chrono::milliseconds(0));
-      if (sub_wait_result.kind() == rclcpp::WaitResultKind::Ready && 
+      if (sub_wait_result.kind() == rclcpp::WaitResultKind::Ready &&
           sub_wait_result.get_wait_set().get_rcl_wait_set().subscriptions[0]) {
         std_msgs::msg::String msg;
         rclcpp::MessageInfo msg_info;
@@ -99,7 +99,7 @@ public:
     subscription_options.callback_group = cb_group_noexec;
 
     rclcpp::QoS qos(rclcpp::KeepLast(10));
-    if (use_transient_local) { 
+    if (use_transient_local) {
       qos = qos.transient_local();
     }
 

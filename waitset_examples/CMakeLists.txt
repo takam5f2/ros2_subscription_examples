@@ -81,7 +81,7 @@ rclcpp_components_register_node(waitset_examples_library
   EXECUTABLE timer_listener_triple_sync_intra)
 rclcpp_components_register_node(waitset_examples_library
   PLUGIN "waitset_examples::TimerListenerSingleWaitSomePeriod"
-  EXECUTABLE timer_listener_single_wait_some_period)  
+  EXECUTABLE timer_listener_single_wait_some_period)
 
 install(TARGETS
   waitset_examples_library

@@ -94,14 +94,14 @@ public:
     subscription_options.callback_group = cb_group_noexec;
 
     rclcpp::QoS qos(rclcpp::KeepLast(10));
-    if (use_transient_local) { 
+    if (use_transient_local) {
       qos = qos.transient_local();
     }
 
     subscriptions_array_[0] = create_subscription<std_msgs::msg::String>("chatter", qos, not_executed_callback, subscription_options);
 
     subscriptions_array_[1] = create_subscription<std_msgs::msg::String>("slower_chatter", qos, not_executed_callback, subscription_options);
-    
+
     // Create Static Wait Set. It cannot be changed afterwards.
     static_wait_set_ = std::make_shared<rclcpp::StaticWaitSet<2, 0, 0, 0, 0, 0>>(
       std::array<rclcpp::StaticWaitSet<2, 0, 0, 0, 0, 0>::SubscriptionEntry, 2>{{{subscriptions_array_[0]}, {subscriptions_array_[1]}}},

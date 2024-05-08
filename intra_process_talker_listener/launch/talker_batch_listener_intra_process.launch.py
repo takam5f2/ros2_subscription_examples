@@ -31,14 +31,14 @@ def generate_launch_description():
         executable='component_container',
         composable_node_descriptions=[
             ComposableNode(
-                package='intra_process_talker_listener', 
+                package='intra_process_talker_listener',
                 plugin='intra_process_talker_listener::TalkerIntraProcess',
                 name='talker_intra_process',
                 namespace='',
                 extra_arguments=[{'use_intra_process_comms': use_intra_process_comms_value}]
             ),
             ComposableNode(
-                package='intra_process_talker_listener', 
+                package='intra_process_talker_listener',
                 plugin='intra_process_talker_listener::TimerBatchListenerIntraProcess',
                 name='timer_batch_listener_intra_process',
                 namespace='',
